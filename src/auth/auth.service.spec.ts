@@ -7,14 +7,14 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from '../users/entities/user.entity';
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 
 // Mocks
 jest.mock('../users/users.service');
 jest.mock('../email/email.service');
-jest.mock('bcrypt');
+jest.mock('bcryptjs');
 jest.mock('@nestjs/jwt');
 
 describe('AuthService', () => {

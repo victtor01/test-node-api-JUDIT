@@ -1,14 +1,18 @@
-FROM node:alpine
+FROM node:latest
 
+# Create app directory
 WORKDIR /usr/app
 
-COPY package.json ./
+COPY package*.json ./
+COPY prisma ./prisma/
 
 RUN npm install
-#RUN npm install -g @nestjs/cli
 
-COPY . .
+COPY . . 
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start:dev"]
+RUN apt-get update -y && apt-get install -y openssl
+RUN npx prisma generate
+
+CMD [ "npm", "run", "start:dev" ]

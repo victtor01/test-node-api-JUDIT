@@ -15,7 +15,7 @@ import { AuthVerifyPassport } from './dto/auth-verify-password.dto';
 import { Request, Response } from 'express';
 import { jwtConstants } from './constants';
 import { ConfigService } from '@nestjs/config';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -63,6 +63,7 @@ export class AuthService {
 
     // compare passwords
     const compare: boolean = await bcrypt.compare(password, user.password);
+
     if (!compare) {
       throw new UnauthorizedException('senha incorreta');
     }
